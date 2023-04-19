@@ -1,19 +1,14 @@
 from datetime import datetime
 
 import requests
-from django import forms
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
-from django.core.paginator import PageNotAnInteger, Paginator
+from django.core.paginator import Paginator
 from django.db.models import Count, F, FloatField, IntegerField, Q, Sum
-from django.db.models.functions import (Coalesce, ExtractMonth, ExtractWeekDay,
-                                        ExtractYear)
-from django.forms import modelformset_factory
-from django.http import HttpResponse, JsonResponse
+from django.db.models.functions import Coalesce
 from django.shortcuts import get_object_or_404, redirect, render
-from django.template import RequestContext
 from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -21,7 +16,6 @@ from django.views import View
 from django.views.generic import (CreateView, DeleteView, ListView,
                                   TemplateView, UpdateView)
 from django.views.generic.edit import CreateView
-from django.views.generic.list import MultipleObjectMixin
 
 from usuarios.models import CustomUsuario
 
