@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking dos Produtos mais Vendidos no Mercado Livre</title>
+</head>
+<body>
+    <h1>Ranking dos Produtos mais Vendidos no Mercado Livre por Categoria</h1>
+    {% for ranking in ranking_produtos %}
+        <h2>{{ ranking.categoria }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Imagem</th>                   
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th> 
+                    <th>Frete Gratis?</th>
+                    <th>Marca</th>                   
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in ranking.produtos %}
+                    <tr>
+                        <td><img src="{{ produto.thumbnail }}" class="avatar avatar-sm me-3 border-radius-lg" alt="user1"></td>
+                        <td><a href="{{ produto.permalink }}">{{ produto.title|default:''|slice:":30" }}{% if produto.title|length > 30 %}...{% endif %}</td>                  </a></td>
+                        <td>{{ produto.price }}</td>
+                        <td>{{ produto.installments.quantity }}</td>
+                        <td>{{ produto.shipping.free_shipping|yesno:"Sim,Não" }}</td>
+                        <td>{{ produto.attributes.value_name }}</td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+</body>
+</html> 
