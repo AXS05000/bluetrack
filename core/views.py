@@ -49,7 +49,7 @@ def ranking_view(request):
     # Categoria MLB1953 - Mais Categorias
 
 
-    categorias_desejadas = ['MLB1368', 'MLB1246', 'MLB1132', 'MLB1430', 'MLB1000','MLB1648']
+    categorias_desejadas = ['MLB1403','MLB1368', 'MLB1246', 'MLB1132', 'MLB1430', 'MLB1000','MLB1648', 'MLB3937', 'MLB1196',]
 
     for categoria in categorias:
         if categoria["id"] in categorias_desejadas:
