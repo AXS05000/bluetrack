@@ -709,10 +709,10 @@
         display: none;
     }
     .container {
-        width: 50%;
+        width: 80%;
     }
     .form {
-        width: 50%;
+        width: 25%;
     }
 
     
@@ -721,7 +721,7 @@
 @media screen and (max-width: 1064px) {
 
     .container {
-        width: 100%;
+        width: auto;
         height: auto;
     }
 
@@ -734,7 +734,7 @@
     }
 
     .form-contratos select{
-        width: 25%;
+        width: 50%;
     }
 
 
