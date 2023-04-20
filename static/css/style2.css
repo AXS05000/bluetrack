@@ -712,7 +712,7 @@
         width: 50%;
     }
     .form {
-        width: 100%;
+        width: 50%;
     }
 
     
@@ -721,7 +721,7 @@
 @media screen and (max-width: 1064px) {
 
     .container {
-        width: auto;
+        width: 90%;
         height: auto;
     }
 
@@ -729,12 +729,12 @@
         flex-direction: column;
         overflow-y: scroll;
         flex-wrap: nowrap;
-        max-height: auto;
-
+        max-height: 22rem;
+        padding-right: 1rem;
     }
 
     .form-contratos select{
-        width: 218px;
+        width: 50%;
     }
 
 
