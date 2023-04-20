@@ -24,6 +24,6 @@ def login_view(request):
     return render(request, 'registration/login.html', {'error': messages.get_messages(request)})
 
 
-
+@login_required(login_url='/login/')
 def index(request):
     return render(request, 'index.html')
