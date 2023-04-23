@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
+from django.db import transaction
 from django.db.models import Count, F, FloatField, IntegerField, Q, Sum
 from django.db.models.functions import Coalesce
 from django.shortcuts import get_object_or_404, redirect, render
@@ -153,6 +154,9 @@ class VendaDeleteView(LoginRequiredMixin, DeleteView):
         return get_object_or_404(Venda, pk=pk)
 
 
+
+
+
 @method_decorator(login_required, name='dispatch')
 class EditarEstoqueView(View):
     template_name = 'pages/editar_estoque.html'
@@ -160,7 +164,6 @@ class EditarEstoqueView(View):
 
     def get(self, request, pk):
         estoque = get_object_or_404(Estoque, pk=pk)
-        # Adição do parâmetro prefix
         form = self.form_class(prefix='estoque', instance=estoque)
         context = {
             'form': form,
@@ -170,17 +173,31 @@ class EditarEstoqueView(View):
 
     def post(self, request, pk):
         estoque = get_object_or_404(Estoque, pk=pk)
-        # Adição do parâmetro prefix
-        form = self.form_class(
-            request.POST, prefix='estoque', instance=estoque)
+        form = self.form_class(request.POST, prefix='estoque', instance=estoque)
         if form.is_valid():
-            form.save()
+            with transaction.atomic():
+                estoque_antigo = Estoque.objects.get(pk=pk)
+                estoque_antigo.pk = None
+                estoque_antigo.save()
+                estoque_antigo.ativo = False
+                estoque_antigo.save()
+
+                # Atualize a referência do produto nas vendas realizadas para o produto antigo
+                vendas_produto_antigo = Venda.objects.filter(produto=estoque)
+                vendas_produto_antigo.update(produto=estoque_antigo)
+
+                estoque_novo = form.save(commit=False)
+                estoque_novo.produto_em_estoque = estoque.produto_em_estoque
+                estoque_novo.ativo = True
+                estoque_novo.save()
+
             return redirect('tables')
+
         context = {
             'form': form,
             'estoque': estoque
         }
-        return render(request, self.tables, context)
+        return render(request, self.template_name, context)
 
 
 @method_decorator(login_required, name='dispatch')

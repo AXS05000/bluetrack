@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import signals
 from django.utils import timezone
+
 from usuarios.models import CustomUsuario
 
 
@@ -34,6 +35,7 @@ class Estoque(Base):
         'Preço de Compra', max_digits=18, decimal_places=2, null=True, blank=True)
     quantidade_em_estoque = models.DecimalField(
         'Quantidade em Estoque', max_digits=18, decimal_places=0, null=True, blank=True)
+    ativo = models.BooleanField(default=True)
 
     class Meta:
         ordering = ['produto_em_estoque']
@@ -49,7 +51,7 @@ class Venda(Base):
     produto = models.ForeignKey(
         Estoque, on_delete=models.SET_NULL, null=True, blank=True,
     )
-
+  
     class Meta:
         ordering = ['data_da_venda']
         
@@ -73,5 +75,7 @@ class Venda(Base):
     def delete(self, *args, **kwargs):
         self.restituir_estoque()
         super(Venda, self).delete(*args, **kwargs)
+
+    
     
 

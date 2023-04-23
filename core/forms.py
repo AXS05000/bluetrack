@@ -19,9 +19,9 @@ class VendaModelForm(forms.ModelForm):
             administradores_group = Group.objects.get(name='Administradores')
 
             if administradores_group in user.groups.all():
-                queryset = Estoque.objects.all()
+                queryset = Estoque.objects.filter(ativo=True)
             elif vendedores_group in user.groups.all():
-                queryset = Estoque.objects.filter(usuario_modificacao=user)
+                queryset = Estoque.objects.filter(usuario_modificacao=user, ativo=True)
             else:
                 queryset = Estoque.objects.none()
 

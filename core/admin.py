@@ -8,7 +8,7 @@ from .models import Estoque, Venda
 @admin.register(Estoque)
 class EstoqueAdmin(admin.ModelAdmin):
     list_display = ('usuario_modificacao', 'produto_em_estoque', 'preco_de_venda', 'preco_de_compra',
-                    'quantidade_em_estoque')
+                    'quantidade_em_estoque', 'ativo')
 
 
 @admin.register(Venda)
