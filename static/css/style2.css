@@ -728,7 +728,15 @@
   
   
   }
-    
+
+  .input-box {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.1rem;
+    min-height: 23rem;
+    min-width: auto;
+}
+
 }
 
 @media screen and (max-width: 1064px) {
@@ -774,6 +782,14 @@
   
   
   }
+
+  .input-box {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.1rem;
+    min-height: 23rem;
+    min-width: auto;
+}
 }
 
 
