@@ -103,15 +103,14 @@ class FormularioDeVendaCreateView(CreateView):
                     venda.save()
                     produto.quantidade_em_estoque -= quantidade_vendida
                     produto.save()
-
+                    messages.success(self.request, f'Venda realizada com sucesso do produto {produto}!')
                     form_saved = True
                 else:
                     messages.error(self.request, f'Ocorreu um erro no formulário {prefix}. Verifique se todos os campos estão preenchidos corretamente.')
                     return super().form_invalid(form)
 
         if form_saved:
-            messages.success(self.request, 'Venda realizada com sucesso!')
-            return super().form_valid(form)  # Adicione esta linha
+            return super().form_valid(form)
         else:
             messages.error(self.request, 'Por favor, preencher os campos de quantidade e produto para continuar.')
             return super().form_invalid(form)
