@@ -9,6 +9,7 @@
   --bs-indigo: #596CFF;
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
+  --bs-pink: #ce0606;
   --bs-red: #F56565;
   --bs-orange: #fd7e14;
   --bs-yellow: #FBD38D;
@@ -25913,6 +25914,14 @@ a {
   line-height: 1.5;
 }
 
+.text-sm2 {
+  line-height: 0.2;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 0.25rem;
+  color:  #ce0606;
+}
+
 .text-xs {
   line-height: 1.25;
 }
@@ -25936,6 +25945,10 @@ p,
 
 .text-sm {
   font-size: 0.875rem !important;
+}
+
+.text-sm2 {
+  font-size: 1.175rem !important;
 }
 
 .text-xs {
@@ -27746,12 +27759,6 @@ pre[class*="language-"] {
 .input-box input::placeholder {
   color: #000000be;
 }
-
-
-
-
-
-
 
 
 
