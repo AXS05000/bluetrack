@@ -176,16 +176,17 @@ class EditarEstoqueView(View):
         form = self.form_class(request.POST, prefix='estoque', instance=estoque)
         if form.is_valid():
             with transaction.atomic():
+                # Primeiro, crie uma cópia do produto atual e inative-a
                 estoque_antigo = Estoque.objects.get(pk=pk)
                 estoque_antigo.pk = None
-                estoque_antigo.save()
                 estoque_antigo.ativo = False
                 estoque_antigo.save()
 
-                # Atualize a referência do produto nas vendas realizadas para o produto antigo
+                # Em seguida, atualize a referência do produto nas vendas realizadas para o produto antigo
                 vendas_produto_antigo = Venda.objects.filter(produto=estoque)
                 vendas_produto_antigo.update(produto=estoque_antigo)
 
+                # Finalmente, salve o novo produto com as informações atualizadas e o atributo 'ativo' definido como True
                 estoque_novo = form.save(commit=False)
                 estoque_novo.produto_em_estoque = estoque.produto_em_estoque
                 estoque_novo.ativo = True
