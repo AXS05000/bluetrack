@@ -77,9 +77,10 @@ class FormularioDeVendaCreateView(CreateView):
 
 
     def form_valid(self, form):
+        form_saved = False
         for prefix in ['form1', 'form2', 'form3', 'form4', 'form5', 'form6', 'form7', 'form8']:
             if any(self.request.POST.getlist(f'{prefix}-{field}')[0] != '' for field in form.fields.keys()):
-                form = self.form_class(self.request.POST, prefix=prefix)
+                form = self.form_class(self.request.POST, prefix=prefix, user=self.request.user)
                 if form.is_valid():
                     venda = form.save(commit=False)
 
@@ -103,11 +104,18 @@ class FormularioDeVendaCreateView(CreateView):
                     produto.quantidade_em_estoque -= quantidade_vendida
                     produto.save()
 
+                    form_saved = True
+                else:
+                    messages.error(self.request, f'Ocorreu um erro no formulário {prefix}. Verifique se todos os campos estão preenchidos corretamente.')
+                    return super().form_invalid(form)
 
+        if form_saved:
+            messages.success(self.request, 'Venda realizada com sucesso!')
+            return super().form_valid(form)  # Adicione esta linha
+        else:
+            messages.error(self.request, 'Por favor, preencher os campos de quantidade e produto para continuar.')
+            return super().form_invalid(form)
 
-        messages.success(self.request, 'Venda realizada com sucesso!')
-
-        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('formulariodevenda')
