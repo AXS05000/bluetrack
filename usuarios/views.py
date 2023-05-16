@@ -8,7 +8,6 @@ from django_ratelimit.decorators import ratelimit
 from .forms import CustomUsuarioCreateForm, LoginForm
 
 
-@ratelimit(key='ip', rate='5/d', method=ratelimit.UNSAFE, block=True)  
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
 
