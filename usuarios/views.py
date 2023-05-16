@@ -1,10 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect, render
-
-from .forms import CustomUsuarioCreateForm, LoginForm
 
 
 def login_view(request):
