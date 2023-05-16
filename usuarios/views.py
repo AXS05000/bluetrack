@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django_ratelimit.decorators import ratelimit
 
+# LEMBRE QUE VC CONFIGUROU O MIDDLEWARE NO SETTINGS.PY COM 'django_ratelimit.middleware.RatelimitMiddleware' ELE TEM QUE SER O PRIMEIRO PARA DAR CERTO.
 
 @ratelimit(key='ip', rate='5/d')  # block=False by default
 def login_view(request):
