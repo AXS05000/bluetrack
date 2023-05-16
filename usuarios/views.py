@@ -2,8 +2,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django_ratelimit.decorators import ratelimit
 
 
+@ratelimit(key='ip', rate='5/m') # Permite 5 requisições por dia por IP
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
