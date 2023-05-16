@@ -167,3 +167,7 @@ X_FRAME_OPTIONS = 'DENY' # Isso adiciona o cabeçalho X-Frame-Options: DENY às 
 
 # LEMBRE-SE DE TROCAR A ROTA DO ADMIN PARA FICAR MAIS SEGURO
 SECURE_SSL_REDIRECT = True
+
+
+
+
