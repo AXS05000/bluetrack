@@ -149,16 +149,19 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 SESSION_COOKIE_AGE = 604800  # 1 semana
-# SESSION_COOKIE_HTTPONLY = True
-# SESSION_COOKIE_SECURE = True
 
 
-#SECURE_HSTS_SECONDS = True
-#SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-#SECURE_CONTENT_TYPE_NOSNIFF = True
-#SUCURE_BROWSER_XSS_FILTER = True
-#CSRF_COOKIE_SECURE = True
-#CSRF_COOKIE_HTTPNLY = True
-#X_FRAME_OPTIONS = 'DENY'
+
+SESSION_COOKIE_HTTPONLY = True #  Isso significa que o cookie da sessão só pode ser acessado por meio do protocolo HTTP(S) e não por meio de JavaScript. Isso é uma medida de segurança que ajuda a prevenir ataques de roubo de sessão através de scripts maliciosos (ataques XSS, ou cross-site scripting).
+SESSION_COOKIE_SECURE = True # Isso significa que o cookie da sessão só será enviado por uma conexão segura (HTTPS). Isso ajuda a prevenir o roubo de sessão por meio de sniffing de rede ou ataques man-in-the-middle.
+
+
+SECURE_HSTS_SECONDS = True # HSTS significa HTTP Strict Transport Security. É um mecanismo de segurança que força o navegador a apenas se comunicar com o servidor via HTTPS, mesmo que o usuário tente acessar a página via HTTP. O valor é o número de segundos que essa regra deve ser mantida pelo navegador.
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True #  Se verdadeiro, a regra HSTS também se aplica a todos os subdomínios.
+SECURE_CONTENT_TYPE_NOSNIFF = True #  Isso adiciona o cabeçalho X-Content-Type-Options: nosniff às respostas HTTP, o que pode ajudar a prevenir ataques onde scripts maliciosos são injetados em arquivos de mídia.
+SUCURE_BROWSER_XSS_FILTER = True # Isso adiciona o cabeçalho X-XSS-Protection: 1; mode=block às respostas HTTP, o que pode ajudar a prevenir ataques XSS.
+CSRF_COOKIE_SECURE = True # Isso significa que o cookie CSRF só será enviado por uma conexão segura (HTTPS). Isso ajuda a prevenir ataques de falsificação de solicitação em sites cruzados (CSRF).
+CSRF_COOKIE_HTTPNLY = True # Isso significa que o cookie CSRF só pode ser acessado por meio do protocolo HTTP(S) e não por meio de JavaScript.
+X_FRAME_OPTIONS = 'DENY' # Isso adiciona o cabeçalho X-Frame-Options: DENY às respostas HTTP, o que impede que o site seja exibido dentro de um <iframe> em outro site. Isso pode ajudar a prevenir ataques de clickjacking.
 
 SECURE_SSL_REDIRECT = True
