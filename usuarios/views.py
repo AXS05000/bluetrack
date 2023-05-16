@@ -7,10 +7,6 @@ from django.shortcuts import redirect, render
 from .forms import CustomUsuarioCreateForm, LoginForm
 
 
-class CustomLoginView(LoginView):
-    template_name = 'registration/login.html'
-
-
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
