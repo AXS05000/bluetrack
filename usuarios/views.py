@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django_ratelimit.decorators import ratelimit
 
 
-@ratelimit(key='ip', rate='5/m', block=True)  # block=True will prevent the view from being processed
+@ratelimit(key='ip', rate='5/d', block=True)  # block=True will prevent the view from being processed
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
