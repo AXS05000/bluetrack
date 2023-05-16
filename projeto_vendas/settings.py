@@ -164,4 +164,6 @@ CSRF_COOKIE_SECURE = True # Isso significa que o cookie CSRF só será enviado p
 CSRF_COOKIE_HTTPNLY = True # Isso significa que o cookie CSRF só pode ser acessado por meio do protocolo HTTP(S) e não por meio de JavaScript.
 X_FRAME_OPTIONS = 'DENY' # Isso adiciona o cabeçalho X-Frame-Options: DENY às respostas HTTP, o que impede que o site seja exibido dentro de um <iframe> em outro site. Isso pode ajudar a prevenir ataques de clickjacking.
 
+
+# LEMBRE-SE DE TROCAR A ROTA DO ADMIN PARA FICAR MAIS SEGURO
 SECURE_SSL_REDIRECT = True
