@@ -1,11 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django_ratelimit.decorators import ratelimit
 
 
-@ratelimit(key='ip', rate='5/m')  #
+@ratelimit(key='ip', rate='5/m', block=True)  # block=True will prevent the view from being processed
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -17,6 +18,7 @@ def login_view(request):
         else:
             messages.error(request, 'Email ou senha incorretos')
     return render(request, 'registration/login.html', {'error': messages.get_messages(request)})
+
 
 
 @login_required(login_url='/login/')
