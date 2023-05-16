@@ -1,9 +1,11 @@
+from brake.decorators import ratelimit
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 
+@ratelimit(rate='5/m')
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
