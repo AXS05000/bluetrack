@@ -151,7 +151,7 @@ AUTH_USER_MODEL = 'usuarios.CustomUsuario'
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
-SESSION_COOKIE_AGE = 604800  # 1 semana
+""" SESSION_COOKIE_AGE = 604800  # 1 semana
 
 
 
@@ -169,7 +169,7 @@ X_FRAME_OPTIONS = 'DENY' # Isso adiciona o cabeçalho X-Frame-Options: DENY às 
 
 
 # LEMBRE-SE DE TROCAR A ROTA DO ADMIN PARA FICAR MAIS SEGURO
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = True """
 
 
 
